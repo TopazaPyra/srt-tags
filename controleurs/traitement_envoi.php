@@ -47,7 +47,7 @@ if (isset($_FILES['srt']) && $_FILES['srt']['error'] == 0) {
 	if ($video) {
 		$sequence_presente = count(get_sequences($video['id']));
 		
-		if ($sequence_presente == 0) {
+		if ($sequence_presente > 0) {
 			echo 'Des annotations correspondantes à cette vidéos existent déjà dans la base de données.';
 		} else {
 			foreach($sequences as $sequence) {
