@@ -8,14 +8,15 @@
 		<script src="../libs/jquery-2.0.2.min.js"></script>
 		<script src="../libs/jquery-ui.min.js"></script>
 		<script src="../scripts/autocompletion.js"></script>
-		<script src="../scripts/playlist.js"></script>
+		<?php if(isset($playlist)) echo '<script>' . $playlist . '</script>' ?>
 		<title>Test</title>
 	</head>
 	
 	<body>
-		<form action='' method='post'>
+		<form action='../controleurs/affichage_sequences.php' method='post'>
 			<div class="ui-widget">
 				<input type="text" name="tag" id="tag">
+				<input type="submit" value="Envoyer">
 			</div>	
 		</form>
 		
