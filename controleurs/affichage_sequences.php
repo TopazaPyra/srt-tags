@@ -2,9 +2,9 @@
 include_once('../modeles/connexion.php');
 include_once('../modeles/get_sequences_by_tag.php');
 
-function parser_sequences($sequences) {
+function parser_sequences($tableau_sequences) {
     $liste_sequences = '[';	
-    foreach($sequences as $ligne) {
+    foreach($tableau_sequences as $ligne) {
 	$liste_sequences .= '{' . 'src: "' . $ligne['src'] . '", in: ' . $ligne['debut'] . ', out: ' . $ligne['fin'] . '},';
     }
     $liste_sequences = substr($liste_sequences, 0, -1);
@@ -13,9 +13,9 @@ function parser_sequences($sequences) {
     return $liste_sequences;
 };
 
-function lecture_sequences($sequences) {
+function lecture_sequences($liste_sequences) {
     return 'sequence = Popcorn.sequence(
-                \'container\',' . $sequences . ');
+                \'container\',' . $liste_sequences . ');
             $(\'video\').width(800);
             $(\'video\').height(640);
             sequence.play();';
