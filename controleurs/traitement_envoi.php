@@ -19,15 +19,15 @@ function traitement_video($fichier_video) {
 	if (in_array($format_video, $extensions_autorisees)) {
 		$titre_video = $infos_video['filename'];
 				
-		$nom_fichier = set_nom_fichier($titre_video);
+		$source = '../videos/' . set_nom_fichier($titre_video) . '.' .$format_video;
 				
-		$presence_video = get_video($nom_fichier);
+		$presence_video = get_video($source);
 				
 		if ($presence_video == false) {
-			$envoi_fichier = move_uploaded_file($fichier_video['tmp_name'], '../videos/' . $nom_fichier . '.' . $format_video);
+			$envoi_fichier = move_uploaded_file($fichier_video['tmp_name'], $source);
 						
 			if ($envoi_fichier) {
-				set_video($titre_video, $nom_fichier, $format_video);
+				set_video($titre_video, $source);
 				return 'Vidéo envoyée avec succès.';
 			} else {
 				return 'Erreur : impossible d\'envoyer la vidéo.';
@@ -36,6 +36,9 @@ function traitement_video($fichier_video) {
 		} else {                
 				return 'La vidéo existe déjà.';
 		}	
+		
+	} else {
+		return 'Type de fichier non autorisé.';
 	}
 }
 

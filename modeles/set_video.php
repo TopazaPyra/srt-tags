@@ -1,10 +1,9 @@
 <?php
-function set_video($titre_video, $nom_fichier, $format_video) {
+function set_video($titre_video, $source) {
 	global $bdd;
 	
-		$req = $bdd->prepare('INSERT INTO videos (titre, nom_fichier, format) VALUES (:titre, :nom_fichier, :format)');
+		$req = $bdd->prepare('INSERT INTO videos (titre, src) VALUES (:titre, :source)');
 		$req->bindParam(':titre', $titre_video);
-		$req->bindParam(':nom_fichier', $nom_fichier);
-		$req->bindParam(':format', $format_video);
+		$req->bindParam(':source', $source);
 		$req->execute();
 }

@@ -1,7 +1,6 @@
 <?php
 include_once('convertisseur_temps.php');
 include_once('decoupage_tags.php');
-include_once('set_nom_fichier.php');
 
 function parser_srt($fichier) {
 	$contenu = file_get_contents($fichier['tmp_name']);
@@ -9,10 +8,8 @@ function parser_srt($fichier) {
 	$i = 0;
 	$sequences = array();
         
-        $infos_fichier = pathinfo($fichier['name']);
-        $titre_fichier = $infos_fichier['filename'];
-        
-        $nom_fichier = set_nom_fichier($titre_fichier);
+    $infos_fichier = pathinfo($fichier['name']);
+    $titre_video = $infos_fichier['filename'];
 	
 	// Premier découpage en fonction du numéro de séquence suivi des temps de la séquence
 	
@@ -29,7 +26,7 @@ function parser_srt($fichier) {
 			$sequences[$i]['fin'] = convertisseur_temps($matches[2]);
 		} else {
 			$sequences[$i]['tags'] = decoupage_tags($decoupage);
-                        $sequences[$i]['fichier'] = $nom_fichier;
+            $sequences[$i]['fichier'] = $titre_video;
 			$i++;
 		}
 	}

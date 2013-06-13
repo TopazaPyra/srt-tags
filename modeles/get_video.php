@@ -1,9 +1,9 @@
 <?php
-function get_video($nom_fichier) {
+function get_video($titre_video) {
     global $bdd;
     
-    $req = $bdd->prepare('SELECT * FROM videos WHERE nom_fichier = :nom_fichier');
-    $req->bindParam(':nom_fichier', $nom_fichier);
+    $req = $bdd->prepare('SELECT * FROM videos WHERE titre = :titre');
+    $req->bindParam(':titre', $titre_video);
     $req->execute();
     $resultat = $req->fetch();
     
