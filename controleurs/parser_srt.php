@@ -2,8 +2,8 @@
 include_once('convertisseur_temps.php');
 include_once('decoupage_tags.php');
 
-function parser_srt($fichier) {
-	$contenu = file_get_contents($fichier['tmp_name']);
+function parser_srt($source_fichier) {
+	$contenu = file_get_contents($source_fichier);
 	$contenu = preg_replace('/\r\n/',' ', $contenu);
 	$i = 0;
 	$sequences = array();

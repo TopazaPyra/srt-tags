@@ -44,7 +44,7 @@ function traitement_video($fichier_video) {
 
 function traitement_srt($fichier_srt) {
 		
-	$sequences = parser_srt($fichier_srt);
+	$sequences = parser_srt($fichier_srt['tmp_name']);
 		
 	$video = get_video($sequences[0]['fichier']);
 		
