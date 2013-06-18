@@ -21,7 +21,7 @@ function traitement_video($fichier_video) {
 				
 		$source = '../videos/' . set_nom_fichier($titre_video) . '.' .$format_video;
 				
-		$presence_video = get_video($source);
+		$presence_video = get_video($titre_video);
 				
 		if ($presence_video == false) {
 			$envoi_fichier = move_uploaded_file($fichier_video['tmp_name'], $source);
