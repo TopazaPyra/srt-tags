@@ -14,28 +14,20 @@ $(document).ready(function() {
 					$('#playlist').remove();
 					if (data == 'Aucune vidéo ne correspond à ce tag.' ) {
 						$('#container').html(data);
-					} else {
-						$('#container').empty();
-						
+					} else {		
 						$('#wrapper').append('<div id="playlist"><h2>Séquences</h2><ul></ul></div>');
 						
-						var tab_sequences = new Array();
+						tab_sequences = new Array();
 						
 						$.each(data, function(index, seq) {
-							var objet_seq = { src: seq['src'], in: parseInt(seq['debut']), out: parseInt(seq['fin'])};
+							objet_seq = { src: seq['src'], in: parseFloat(seq['debut']), out: parseFloat(seq['fin'])};
 							tab_sequences.push(objet_seq);
 							
-							var lien = '<li><a href="#" onclick="javascript:$(\'#container\').empty(); sequence = Popcorn.sequence(\'container\',' + objet_seq + '); $(\'video\').width(800); $(\'video\').height(640); sequence.play();">' + seq['titre'] + '</a></li>';
+							lien = '<li><a href="#" onclick="javascript:lectureSequences([tab_sequences[' + index + ']]);">' + seq['titre'] +'</a></li>';
 							$('#playlist ul').append(lien);
 						})
 						
-						var sequence = Popcorn.sequence(
-							'container', tab_sequences);
-						
-						$('video').width(800);
-						$('video').height(640);
-						
-						sequence.play();
+						lectureSequences(tab_sequences);
 					}
 				}
 			});
@@ -46,3 +38,11 @@ $(document).ready(function() {
 	
 	});
 });
+
+function lectureSequences(sequences) {
+	$('#container').empty();
+	var sequence = Popcorn.sequence('container', sequences);
+	$('video').width(800);
+	$('video').height(640);
+	sequence.play();
+}
