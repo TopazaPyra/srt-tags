@@ -8,7 +8,7 @@ function parser_srt($source_fichier) {
 	$i = 0;
 	$sequences = array();
         
-    $infos_fichier = pathinfo($fichier['name']);
+    $infos_fichier = pathinfo($source_fichier['name']);
     $titre_video = $infos_fichier['filename'];
 	
 	// Premier découpage en fonction du numéro de séquence suivi des temps de la séquence

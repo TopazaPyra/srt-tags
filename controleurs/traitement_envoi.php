@@ -43,37 +43,60 @@ function traitement_video($fichier_video) {
 }
 
 function traitement_srt($fichier_srt) {
-		
-	$sequences = parser_srt($fichier_srt['tmp_name']);
-		
-	$video = get_video($sequences[0]['fichier']);
-		
-	if ($video) {
-		$sequence_presente = count(get_sequences($video['id']));
+	
+	$infos_fichier = pathinfo($fichier_srt['name']);
+	$extensions_autorisees = array('srt');
+	$format_fichier = strtolower($infos_fichier['extension']);
+	
+	if (in_array($format_fichier, $extensions_autorisees)) {
+		$titre_fichier = $infos_fichier['filename'];
+				
+		$source = '../fichiers_srt/' . set_nom_fichier($titre_fichier) . '.' .$format_fichier;
+				
+		$video = get_video($titre_fichier);
+				
+		if ($video == false) {
+			return 'Erreur : la vidéo n\'existe pas.';
 			
-		if ($sequence_presente > 0) {
-			return 'Des annotations correspondantes à cette vidéos existent déjà dans la base de données.';
 		} else {
-			foreach($sequences as $sequence) {
-				$id_sequence = set_sequence($sequence, $video);
+			$sequence_presente = count(get_sequences($video['id']));
+				
+			if ($sequence_presente > 0) {
+				return 'Des annotations correspondantes à cette vidéos existent déjà dans la base de données.';
+				
+			} else {
+				$envoi_fichier = move_uploaded_file($fichier_srt['tmp_name'], $source);
 					
-				foreach($sequence['tags'] as $tag) {
-					$tag_present = get_tag($tag);
-					$id_tag = $tag_present['id'];
-						
-					if($tag_present == false) {
-						$id_tag = set_tag($tag);
+				if ($envoi_fichier) {
+					
+					$sequences = parser_srt($source);
+					
+					foreach($sequences as $sequence) {
+						$id_sequence = set_sequence($sequence, $video);
+					
+						foreach($sequence['tags'] as $tag) {
+							$tag_present = get_tag($tag);
+							$id_tag = $tag_present['id'];
+							
+							if($tag_present == false) {
+								$id_tag = set_tag($tag);
+							}
+							set_tag_sequence($id_tag, $id_sequence);
+						}
 					}
-					set_tag_sequence($id_tag, $id_sequence);
+					return 'Annotations envoyées avec succès.';
+				
+				} else {
+					return 'Erreur : impossible d\'envoyer le fichier.';
 				}
 			}
-			return 'Annotations envoyées dans la base de données.';
 		}
-			
+	 
 	} else {
-		return 'Erreur : la vidéo n\'existe pas.';
+		return 'Type de fichier non autorisé.';
 	}
 }
+
 
 if (isset($_FILES['video']) && $_FILES['video']['error'] == 0) {
 	$resultat_traitement_video = traitement_video($_FILES['video']);
