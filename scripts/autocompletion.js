@@ -1,6 +1,13 @@
 $(document).ready(function() {
-	$("#tag").autocomplete({
-		source: "../scripts/ajax/recherche_tags.php",
+	$("#tag").typeahead({
 		minLength: 2,
-	});                
+		source: function (query, process) {
+			return $.getJSON(
+				'../scripts/ajax/recherche_tags.php',
+				{ query: query },
+				function (data) {
+					return process(data);
+				});
+		}
+	});             
 });
