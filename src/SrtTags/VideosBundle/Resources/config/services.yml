@@ -1,0 +1,5 @@
+parameters:
+#    srt_tags_videos.example.class: SrtTags\VideosBundle\Example
+services:
+    srttags_videos.parsersrt:
+        class: SrtTags\VideosBundle\ParserSrt\ParserSrt        

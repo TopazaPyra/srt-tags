@@ -1,0 +1,14 @@
+{% extends "SrtTagsVideosBundle::layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Ajout d'un fichier de séquences 
+{% endblock %}
+
+{% block videos_content_title %}Ajout d'un fichier de séquences{% endblock %}
+
+{% block videos_content %}
+	<form method="post" {{form_enctype(form) }}>
+		{{ form_widget(form) }}
+		<input type="submit" class="btn btn-primary" value="Envoyer" />
+	</form>
+{% endblock %}

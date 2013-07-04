@@ -1,0 +1,32 @@
+{% extends "SrtTagsVideosBundle::layout.html.twig" %}
+
+{% block css %}
+<link type="text/css" href="{{ asset('bundles/srttagsvideos/css/style.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ asset('bundles/srttagsvideos/js/popcorn-complete.js') }}"></script>
+<script src="{{ asset('bundles/srttagsvideos/js/autocompletion.js') }}"></script>
+<script src="{{ asset('bundles/srttagsvideos/js/playlist.js') }}"></script> 
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} - Index
+{% endblock %}
+
+{% block videos_content %}
+	<section>
+		<form class="form-search" id="form_tag">
+			<div class="input-append">
+				<input type="text" name="tag" id="tag" autocomplete="off" class="span2 search-query" required>
+				<button id="submit" type="submit" class="btn">Recherche</button>
+			</div>
+		</form>
+
+		<div id="container">
+			<p>Aucune liste de lecture définie. Recherchez des séquences en entrant un tag dans le formulaire ci-dessus.</p>
+		</div>
+	</section>
+	
+{% endblock %}
+

@@ -1,0 +1,37 @@
+{% extends "SrtTagsVideosBundle::layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Liste des fichiers de séquences
+{% endblock %}
+
+{% block videos_content_title %}Liste des fichiers de séquences{% endblock %}
+
+{% block videos_content %}
+	
+	{% for message in app.session.flashbag.get('success') %}
+		<p class="text-center text-success">{{ message }}</p>
+	{% endfor %}
+	{% for message in app.session.flashbag.get('error') %}
+		<p class="text-center text-error">{{ message }}</p>
+	{% endfor %}
+	
+	<ul>
+		{% for srtFile in srtFiles %}
+			<li>{{ srtFile.title }} | <a href="{{ path('srttagsvideos_updateSrtFile', {'id': srtFile.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir remplacer le fichier de séquences lié à {{ srtFile.title }} ?');"><i class="icon-upload"></i> Remplacer</a> <a href="{{ path('srttagsvideos_removeSrtFile', {'id': srtFile.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ srtFile.title }} ?');"><i class="icon-trash"></i> Supprimer</a></li>
+		{% else %}
+			<li>Aucun fichier de séquences trouvé.</li>
+		{% endfor %}
+	</ul>
+	
+	{% if nbrPage > 1 %} 
+		<div class="pagination">
+			<ul>
+				{% for p in range(1, nbrPage) %}
+					<li {% if p == page %} class="active"{% endif %}>
+						<a href="{{ path('srttagsvideos_listSequences', {'page': p}) }}">{{ p }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,55 @@
+srttagsvideos_index:
+    path:  /
+    defaults: { _controller: SrtTagsVideosBundle:Videos:index }
+
+srttagsvideos_adminSequences:
+    path: /admin/sequences
+    defaults: { _controller: SrtTagsVideosBundle:Videos:adminSequences }
+    
+srttagsvideos_addSrtFile:
+    path: /admin/sequences/add
+    defaults: { _controller: SrtTagsVideosBundle:Videos:addSrtFile }
+    
+srttagsvideos_listSrtFiles:
+    path: /admin/sequences/list/{page}
+    defaults: { _controller: SrtTagsVideosBundle:Videos:listSrtFiles, page: 1 }
+    requirements:
+        page: \d*
+        
+srttagsvideos_updateSrtFile:
+    path: /admin/sequences/update/{id}
+    defaults: { _controller: SrtTagsVideosBundle:Videos:updateSrtFile }
+    
+srttagsvideos_removeSrtFile:
+    path: /admin/sequences/remove/{id}
+    defaults: { _controller: SrtTagsVideosBundle:Videos:removeSrtFile }
+    
+srttagsvideos_adminVideos:
+    path: /admin/videos
+    defaults: { _controller: SrtTagsVideosBundle:Videos:adminVideos }
+    
+srttagsvideos_addVideo:
+    path: /admin/videos/add
+    defaults: { _controller: SrtTagsVideosBundle:Videos:addVideo }
+    
+srttagsvideos_listVideos:
+    path: /admin/videos/list/{page}
+    defaults: { _controller: SrtTagsVideosBundle:Videos:listVideos, page: 1 }
+    requirements:
+        page: \d*
+    
+srttagsvideos_removeVideo:
+    path: /admin/videos/remove/{id}
+    defaults: { _controller: SrtTagsVideosBundle:Videos:removeVideo }
+    
+srttagsvideos_about:
+    path: /about
+    defaults: { _controller: SrtTagsVideosBundle:Videos:about }
+    
+srttagsvideos_search:
+    path: /search
+    defaults: { _controller: SrtTagsVideosBundle:VideosAjax:search }
+    
+srttagsvideos_printSequences:
+    path: /printsequences
+    defaults: { _controller: SrtTagsVideosBundle:VideosAjax:printSequences }

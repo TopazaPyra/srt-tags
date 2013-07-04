@@ -1,0 +1,14 @@
+{% extends "SrtTagsVideosBundle::layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Gestion des séquences
+{% endblock %}
+
+{% block videos_content_title %}Gestion des séquences{% endblock %}
+
+{% block videos_content %}
+	<ul>
+		<li><a href="{{ path('srttagsvideos_addSrtFile') }}">Ajouter un fichier de séquences</a></li>
+		<li><a href="{{ path('srttagsvideos_listSrtFiles') }}">Liste des fichiers de séquences</a></li>
+	</ul>
+{% endblock %}

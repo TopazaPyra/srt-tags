@@ -1,0 +1,4 @@
+srt_tags_videos:
+    resource: "@SrtTagsVideosBundle/Resources/config/routing.yml"
+    prefix:   /
+

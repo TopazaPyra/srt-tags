@@ -1,0 +1,16 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+	Vidéos - {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+<h2>{% block videos_content_title %}{% endblock %}</h2>
+
+<hr />
+
+{% block videos_content %}
+{% endblock %}
+
+{% endblock %}

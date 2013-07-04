@@ -1,0 +1,14 @@
+{% extends "SrtTagsVideosBundle::layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Gestion des vidéos
+{% endblock %}
+
+{% block videos_content_title %}Gestion des vidéos{% endblock %}
+
+{% block videos_content %}
+	<ul>
+		<li><a href="{{ path('srttagsvideos_addVideo') }}">Ajouter une vidéo</a></li>
+		<li><a href="{{ path('srttagsvideos_listVideos') }}">Liste des vidéos</a></li>
+	</ul>
+{% endblock %}

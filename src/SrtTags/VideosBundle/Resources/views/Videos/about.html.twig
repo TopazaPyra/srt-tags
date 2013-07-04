@@ -1,0 +1,19 @@
+{% extends "SrtTagsVideosBundle::layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - À propos
+{% endblock %}
+
+{% block videos_content_title %}À propos{% endblock %}
+
+{% block videos_content %}
+	<p>Srt-Tags est développé par le laboratoire Topaza Pyra au sein de l'université Lyon 2.</p>
+	<p>Ce logiciel libre repose sur les technologies open source suivantes :
+		<ul>
+			<li>Boostrap</li>
+			<li>jQuery</li>
+			<li>Popcorn.js</li>
+			<li>Symfony 2</li>
+		</ul>
+	</p>
+{% endblock %}
