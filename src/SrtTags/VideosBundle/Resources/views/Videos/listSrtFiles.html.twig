@@ -18,7 +18,7 @@
 	<ul class="nav list-hover">
 		{% for srtFile in srtFiles %}
 			<li>{{ srtFile.title }} <ul class="inline pull-right">
-										<li><a href="../../../{{ srtFile.getWebPath() }}" download="{{ srtFile.title }}.srt"><i class="icon-download"></i> Télécharger</a></li>
+										<li><a href="{{ asset(srtFile.webPath) }}" download="{{ srtFile.title }}.srt"><i class="icon-download"></i> Télécharger</a></li>
 										<li><a href="{{ path('srttagsvideos_updateSrtFile', {'id': srtFile.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir remplacer le fichier de séquences lié à {{ srtFile.title }} ?');"><i class="icon-upload"></i> Remplacer</a></li>
 										<li><a href="{{ path('srttagsvideos_removeSrtFile', {'id': srtFile.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ srtFile.title }} ?');"><i class="icon-trash"></i> Supprimer</a></li>
 									  </ul>
