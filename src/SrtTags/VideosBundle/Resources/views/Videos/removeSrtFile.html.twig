@@ -1,0 +1,18 @@
+{% extends "SrtTagsVideosBundle::layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Supprimer un fichier de séquences 
+{% endblock %}
+
+{% block videos_content_title %}Supprimer un fichier de séquences{% endblock %}
+
+{% block videos_content %}
+
+	<p>Êtes-vous sûr de vouloir supprimer le fichier de séquences "{{ srtFile.title }}" ?</p>
+
+	<form action="{{ path('srttagsvideos_removeSrtFile', {'id': srtFile.id}) }}" method="post">
+		<a href="{{ path('srttagsvideos_listSrtFiles') }}" class="btn">Annuler</a>
+		<input type="submit" class="btn btn-danger" value="Supprimer" />
+		{{ form_rest(form) }}
+	</form>
+{% endblock %}

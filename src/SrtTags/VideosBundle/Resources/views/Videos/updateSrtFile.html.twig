@@ -1,0 +1,18 @@
+{% extends "SrtTagsVideosBundle::layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Remplacer un fichier de séquences 
+{% endblock %}
+
+{% block videos_content_title %}Remplacer un fichier de séquences{% endblock %}
+
+{% block videos_content %}
+
+	<p>Êtes-vous sûr de vouloir remplacer le fichier de séquences "{{ oldSrtFile.title }}" ?</p>
+
+	<form action="{{ path('srttagsvideos_updateSrtFile', {'id': oldSrtFile.id}) }}" method="post">
+		<a href="{{ path('srttagsvideos_listSrtFiles') }}" class="btn">Annuler</a>
+		<input type="submit" class="btn btn-danger" value="Remplacer" />
+		{{ form_rest(form) }}
+	</form>
+{% endblock %}

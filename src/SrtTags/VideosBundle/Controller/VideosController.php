@@ -146,27 +146,57 @@ class VideosController extends Controller
      
     public function updateSrtFileAction(SrtFile $oldSrtFile)
     {
-		$em = $this->getDoctrine()
-		           ->getManager();
+				$form = $this->createFormBuilder()->getForm();
+        
+                $request = $this->getRequest();
+                
+                if ($request->getMethod() == 'POST') {
+                    $form->bind($request);
+                    
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()
+		                           ->getManager();
+                        
+                        $em->remove($oldSrtFile);
+                        $em->flush();
 		
-		$em->remove($oldSrtFile);
-		$em->flush();
-		
-		return $this->redirect( $this->generateUrl('srttagsvideos_addSrtFile') );
+                        return $this->redirect( $this->generateUrl('srttagsvideos_addSrtFile') );
+                    }
+                }
+                
+				return $this->render('SrtTagsVideosBundle:Videos:updateSrtFile.html.twig', array(
+                    'oldSrtFile' => $oldSrtFile,
+                    'form'    => $form->createView()
+                ));
     }
     
     
     public function removeSrtFileAction(SrtFile $srtFile)
     {
-		$em = $this->getDoctrine()
-		           ->getManager();
+                $form = $this->createFormBuilder()->getForm();
+        
+                $request = $this->getRequest();
+                
+                if ($request->getMethod() == 'POST') {
+                    $form->bind($request);
+                    
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()
+		                           ->getManager();
+                        
+                        $em->remove($srtFile);
+                        $em->flush();
+                        
+                        $this->get('session')->getFlashBag()->add('success', 'Fichier de séquences supprimé avec succès.');
 		
-		$em->remove($srtFile);
-		$em->flush();
-		
-		$this->get('session')->getFlashBag()->add('success', 'Fichier de séquences supprimé avec succès.');
-		
-		return $this->redirect( $this->generateUrl('srttagsvideos_listSrtFiles') );
+                        return $this->redirect( $this->generateUrl('srttagsvideos_listSrtFiles') );
+                    }
+                }
+                
+				return $this->render('SrtTagsVideosBundle:Videos:removeSrtFile.html.twig', array(
+                    'srtFile' => $srtFile,
+                    'form'    => $form->createView()
+                ));
     }
 	
 		
@@ -236,15 +266,30 @@ class VideosController extends Controller
 	
     public function removeVideoAction(Video $video)
     {
-		$em = $this->getDoctrine()
-		           ->getManager();
+				$form = $this->createFormBuilder()->getForm();
+        
+                $request = $this->getRequest();
+                
+                if ($request->getMethod() == 'POST') {
+                    $form->bind($request);
+                    
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()
+		                           ->getManager();
+                        
+                        $em->remove($video);
+                        $em->flush();
+                        
+                        $this->get('session')->getFlashBag()->add('success', 'Fichier vidéo supprimé avec succès.');
 		
-		$em->remove($video);
-		$em->flush();
-		
-		$this->get('session')->getFlashBag()->add('success', 'Vidéo supprimée avec succès.');
-		
-		return $this->redirect( $this->generateUrl('srttagsvideos_listVideos') );
+                        return $this->redirect( $this->generateUrl('srttagsvideos_listVideos') );
+                    }
+                }
+                
+				return $this->render('SrtTagsVideosBundle:Videos:removeVideo.html.twig', array(
+                    'video' => $video,
+                    'form'  => $form->createView()
+                ));
     }
 	
 	
