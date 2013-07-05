@@ -1,5 +1,9 @@
 {% extends "::layout.html.twig" %}
 
+{% block css %}
+	<link type="text/css" href="{{ asset('bundles/srttagsvideos/css/style.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block title %}
 	Vidéos - {{ parent() }}
 {% endblock %}

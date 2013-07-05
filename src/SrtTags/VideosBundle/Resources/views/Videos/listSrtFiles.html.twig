@@ -15,9 +15,14 @@
 		<p class="text-center text-error">{{ message }}</p>
 	{% endfor %}
 	
-	<ul>
+	<ul class="nav list-hover">
 		{% for srtFile in srtFiles %}
-			<li>{{ srtFile.title }} | <a href="{{ path('srttagsvideos_updateSrtFile', {'id': srtFile.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir remplacer le fichier de séquences lié à {{ srtFile.title }} ?');"><i class="icon-upload"></i> Remplacer</a> <a href="{{ path('srttagsvideos_removeSrtFile', {'id': srtFile.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ srtFile.title }} ?');"><i class="icon-trash"></i> Supprimer</a></li>
+			<li>{{ srtFile.title }} <ul class="inline pull-right">
+										<li><a href="../../../{{ srtFile.getWebPath() }}" download="{{ srtFile.title }}.srt"><i class="icon-download"></i> Télécharger</a></li>
+										<li><a href="{{ path('srttagsvideos_updateSrtFile', {'id': srtFile.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir remplacer le fichier de séquences lié à {{ srtFile.title }} ?');"><i class="icon-upload"></i> Remplacer</a></li>
+										<li><a href="{{ path('srttagsvideos_removeSrtFile', {'id': srtFile.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ srtFile.title }} ?');"><i class="icon-trash"></i> Supprimer</a></li>
+									  </ul>
+			</li>
 		{% else %}
 			<li>Aucun fichier de séquences trouvé.</li>
 		{% endfor %}

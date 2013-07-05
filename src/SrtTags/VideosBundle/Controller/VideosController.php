@@ -143,7 +143,7 @@ class VideosController extends Controller
 		));
     }
     
-    
+     
     public function updateSrtFileAction(SrtFile $oldSrtFile)
     {
 		$em = $this->getDoctrine()

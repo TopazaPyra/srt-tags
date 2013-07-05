@@ -1,3 +1,7 @@
 #playlist h2 {
 	text-align: center;
 }
+
+ul.list-hover li:hover {
+	background-color: #EEEEEE;
+}

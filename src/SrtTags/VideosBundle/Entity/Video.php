@@ -49,6 +49,13 @@ class Video
      * @ORM\Column(name="path", type="string", length=255)
      */
     private $path;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="format", type="string", length=4)
+     */
+    private $format;
 
 
     /**
@@ -76,8 +83,9 @@ class Video
     {
         if (null !== $this->getFile()) {
 			$filename = pathinfo($this->getFile()->getClientOriginalName(), PATHINFO_FILENAME);
-			$extension = pathinfo($this->getFile()->getClientOriginalName(), PATHINFO_EXTENSION);
+			$format = pathinfo($this->getFile()->getClientOriginalName(), PATHINFO_EXTENSION);
 			
+			$this->format = $format;
 			$this->title = $filename;
 			
 			$validName = strtolower($filename);
@@ -89,7 +97,7 @@ class Video
 			$validName = str_replace(' ', '_', $validName);
 			$validName = preg_replace('/[\W]/', '', $validName);
 			
-            $this->path = $validName.'.'.$extension;
+            $this->path = $validName.'.'.$format;
         }
     }
     
@@ -158,6 +166,29 @@ class Video
     public function setTitle($title)
     {
         $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get format
+     *
+     * @return string 
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+    
+        /**
+     * Set format
+     *
+     * @param string $format
+     * @return Video
+     */
+    public function setFormat($format)
+    {
+        $this->format = $format;
     
         return $this;
     }
