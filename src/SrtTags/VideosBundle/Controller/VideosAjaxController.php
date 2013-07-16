@@ -12,14 +12,11 @@ use SrtTags\VideosBundle\Entity\Tag;
 class VideosAjaxController extends Controller
 {
     public function searchAction()
-    {
-        $request = $this->getRequest();
-        $tag = $request->query->get('query');
-            
+    {   
         $listTags = $this->getDoctrine()
-		                 ->getManager()
-		                 ->getRepository('SrtTagsVideosBundle:Tag')
-                         ->listTags($tag);
+		         ->getManager()
+		         ->getRepository('SrtTagsVideosBundle:Tag')
+                         ->findAll();
                
         foreach ($listTags as $tag)
         {
@@ -37,7 +34,7 @@ class VideosAjaxController extends Controller
             
         $sequences = $this->getDoctrine()
                           ->getManager()
-				          ->getRepository('SrtTagsVideosBundle:Sequence')
+			  ->getRepository('SrtTagsVideosBundle:Sequence')
                           ->getSequencesByTag($tag);
         
         if ($sequences == false) {

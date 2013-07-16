@@ -12,12 +12,4 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
-    public function listTags($tag)
-    {
-        $query = $this->_em->createQuery('SELECT t FROM SrtTagsVideosBundle:Tag t WHERE t.tag LIKE :tag');
-        $query->setParameter('tag', '%'.$tag.'%');
-        $resultats = $query->getResult();
-        
-        return $resultats;
-    }
 }
