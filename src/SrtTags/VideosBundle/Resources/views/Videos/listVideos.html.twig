@@ -18,14 +18,17 @@
 	
 	<ul class="nav list-hover">
 		{% for video in videos %}
-			<li>{{ video.title }} ({{ video.format }}) <ul class="inline pull-right">
-										<li><a href="{{ asset(video.webPath) }}" download="{{ video.title ~ '.' ~ video.format }}"><i class="icon-download"></i> Télécharger</a></li>
-										<li><a href="{{ path('srttagsvideos_removeVideo', {'id': video.id}) }}"><i class="icon-trash"></i> Supprimer</a></li>
-									</ul>
+			<li>{{ video.title }} ({{ video.format }})
+				<ul class="inline pull-right">
+					<li><a href="{{ asset(video.webPath) }}" download="{{ video.title ~ '.' ~ video.format }}"><i class="icon-download"></i> Télécharger</a></li>
+					<li><a href="{{ path('srttagsvideos_updateVideo', {'id': video.id}) }}"><i class="icon-upload"></i> Remplacer</a></li>
+					<li><a href="{{ path('srttagsvideos_removeVideo', {'id': video.id}) }}"><i class="icon-trash"></i> Supprimer</a></li>
+				</ul>
 			</li>
 		{% else %}
 			<li>Aucune vidéo trouvée.</li>
 		{% endfor %}
+
 	</ul>
 	
 	{% if nbrPage > 1 %} 

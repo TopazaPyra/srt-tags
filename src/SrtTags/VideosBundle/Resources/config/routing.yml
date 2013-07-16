@@ -37,6 +37,10 @@ srttagsvideos_listVideos:
     defaults: { _controller: SrtTagsVideosBundle:Videos:listVideos, page: 1 }
     requirements:
         page: \d*
+        
+srttagsvideos_updateVideo:
+    path: /admin/videos/update/{id}
+    defaults: { _controller: SrtTagsVideosBundle:Videos:updateVideo }
     
 srttagsvideos_removeVideo:
     path: /admin/videos/remove/{id}

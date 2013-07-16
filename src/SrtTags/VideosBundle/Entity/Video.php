@@ -4,6 +4,7 @@ namespace SrtTags\VideosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -12,13 +13,16 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\Table(name="videos")
  * @ORM\Entity(repositoryClass="SrtTags\VideosBundle\Entity\VideoRepository")
  * @ORM\HasLifecycleCallbacks
+ * 
+ * @UniqueEntity(fields="title")
+ * @UniqueEntity(fields="path")
  */
 class Video
 {
 	private $temp;
 	
 	/**
-	 * @Assert\File(maxSize="100M")
+	 * @Assert\File(maxSize="100M", mimeTypes={"application/ogg", "video/webm"})
 	 */
 	private $file; 
 	
@@ -39,14 +43,14 @@ class Video
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, unique=true)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=255)
+     * @ORM\Column(name="path", type="string", length=255, unique=true)
      */
     private $path;
     
@@ -202,6 +206,27 @@ class Video
     {
         return $this->title;
     }
+    
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+    
+    /**
+     * Set path
+     * 
+     * @param string $format
+     * @return Video
+     */
+    public function setPath($path)
+    {
+		$this->path = $path;
+	}
     
     /**
      * Get absolute path.

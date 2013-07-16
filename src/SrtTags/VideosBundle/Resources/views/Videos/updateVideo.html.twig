@@ -1,0 +1,14 @@
+{% extends "SrtTagsVideosBundle::layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Mise à jour de vidéo
+{% endblock %}
+
+{% block videos_content_title %}Mise à jour de vidéo{% endblock %}
+
+{% block videos_content %}
+	<form method="post" {{form_enctype(form) }}>
+		{{ form_widget(form) }}
+		<input type="submit" class="btn btn-primary" value="Envoyer" />
+	</form>
+{% endblock %}

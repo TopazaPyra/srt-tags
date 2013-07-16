@@ -222,21 +222,24 @@ class VideosController extends Controller
 		
 			if ($form->isValid()) {
 				
-				$videoFormat = strtolower(pathinfo($video->getFile()->getClientOriginalName(), PATHINFO_EXTENSION));
-				$authorizedFormats = array('ogv','webm');
+				$videoTitle = pathinfo($video->getFile()->getClientOriginalName(), PATHINFO_FILENAME);
+					
+				$em = $this->getDoctrine()
+						   ->getManager();
+					
+				$videoRepository = $em->getRepository('SrtTagsVideosBundle:Video');
+					
+				$videoExists = $videoRepository->findOneByTitle($videoTitle);
 				
-				if (in_array($videoFormat, $authorizedFormats)) {
-				
-					$em = $this->getDoctrine()
-							   ->getManager();
+				if ($videoExists == false) { 
 							   
 					$em->persist($video);
 					$em->flush();
-				
+					
 					$this->get('session')->getFlashBag()->add('success', 'Vidéo envoyée avec succès.');
 					
 				} else {
-					$this->get('session')->getFlashBag()->add('error', 'Format de fichier non autorisé.');
+					$this->get('session')->getFlashBag()->add('error', 'Un fichier vidéo portant ce nom existe déjà.');
 				}
 				
 				return $this->redirect( $this->generateUrl('srttagsvideos_listVideos') );
@@ -262,6 +265,46 @@ class VideosController extends Controller
 			'nbrPage' => ceil(count($videos)/10)
 		));
     }
+    
+    
+    public function updateVideoAction(Video $video)
+    {
+		$form = $this->createFormBuilder($video)
+		             ->add('file')
+		             ->getForm();
+		
+		$request = $this->getRequest();
+		
+		if ($request->getMethod() == 'POST') {
+			
+			$form->bind($request);
+			
+			if ($form->isValid()) {
+				
+				$videoTitle = pathinfo($video->getFile()->getClientOriginalName(), PATHINFO_FILENAME);
+				
+				if ($videoTitle == $video->getTitle()) {
+					
+					$em = $this->getDoctrine()
+				           ->getManager();
+				
+					$em->persist($video);
+					$em->flush();
+				
+					$this->get('session')->getFlashBag()->add('success', 'Fichier vidéo mis à jour avec succès.');
+					
+				} else {
+					$this->get('session')->getFlashBag()->add('error', 'Le titre du nouveau fichier et celui de l\'ancienne vidéo ne correspondent pas.');
+				}
+				
+				return $this->redirect( $this->generateUrl('srttagsvideos_listVideos') );
+			}
+		}
+		
+		return $this->render('SrtTagsVideosBundle:Videos:updateVideo.html.twig', array(
+            'form'  => $form->createView()
+        ));
+	}
     
 	
     public function removeVideoAction(Video $video)
