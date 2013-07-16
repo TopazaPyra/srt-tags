@@ -4,6 +4,7 @@ namespace SrtTags\VideosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -12,13 +13,16 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\Table(name="srtFiles")
  * @ORM\Entity(repositoryClass="SrtTags\VideosBundle\Entity\SrtFileRepository")
  * @ORM\HasLifecycleCallbacks
+ * 
+ * @UniqueEntity(fields="title")
+ * @UniqueEntity(fields="path")
  */
 class SrtFile
 {
 	private $temp;
 	
 	/**
-	 * @Assert\File(maxSize="1M")
+	 * @Assert\File(maxSize="1M", mimeTypes="text/plain")
 	 */
 	private $file;
 	
@@ -39,14 +43,14 @@ class SrtFile
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, unique=true)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=255)
+     * @ORM\Column(name="path", type="string", length=255, unique=true)
      */
     private $path;
 
