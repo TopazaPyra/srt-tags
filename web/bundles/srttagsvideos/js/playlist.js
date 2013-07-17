@@ -17,10 +17,10 @@ $(document).ready(function() {
 					array_sequences = new Array();
 						
 					$.each(data, function(index, seq) {
-						object_seq = { src: '../uploads/videos/' + seq['path'], in: parseInt(seq['start']), out: parseInt(seq['stop'])};
+						object_seq = { src: '../uploads/videos/' + seq['video']['path'], in: parseInt(seq['start']), out: parseInt(seq['stop'])};
 						array_sequences.push(object_seq);
 							
-						lien = '<li><a href="#" onclick="javascript:playSequences([array_sequences[' + index + ']]);">' + seq['title'] +'</a></li>';
+						lien = '<li><a href="#" onclick="javascript:playSequences([array_sequences[' + index + ']]);">' + seq['video']['title'] +'</a></li>';
 						$('#playlist ul').append(lien);
 					})
 						

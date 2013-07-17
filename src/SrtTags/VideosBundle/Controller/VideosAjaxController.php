@@ -30,12 +30,14 @@ class VideosAjaxController extends Controller
     public function printSequencesAction()
     {
         $request = $this->getRequest();
-        $tag = $request->request->get('tag');
+        $tags = $request->request->get('tag');
+        
+        $listTags = explode(" ", trim($tags));
             
         $sequences = $this->getDoctrine()
                           ->getManager()
 			  ->getRepository('SrtTagsVideosBundle:Sequence')
-                          ->getSequencesByTag($tag);
+                          ->getSequencesByTags($listTags);
         
         if ($sequences == false) {
             throw $this->createNotFoundException();          

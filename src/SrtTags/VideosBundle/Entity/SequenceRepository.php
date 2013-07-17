@@ -12,16 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class SequenceRepository extends EntityRepository
 {
-    public function getSequencesByTag($tag)
+    public function getSequencesByTags(array $tags)
     {
-        $query = $this->_em->createQuery('SELECT s.start, s.stop, v.title, v.path
-                                          FROM SrtTagsVideosBundle:Sequence s
-                                          JOIN s.video v
-                                          JOIN s.tags t
-                                          WHERE t.tag = :tag');
-        $query->setParameter('tag', $tag);
-        $resultats = $query->getResult();
         
-        return $resultats;
+        $qb = $this->createQueryBuilder('s');
+        
+        $qb->join('s.video', 'v')
+           ->addSelect('v')
+           ->join('s.tags', 't');
+           
+		$qb->where('t.tag = :tag');
+		
+		$qb->setParameter('tag', $tags[0]);
+        
+        return $qb->getQuery()
+                  ->getArrayResult();
     }
 }
