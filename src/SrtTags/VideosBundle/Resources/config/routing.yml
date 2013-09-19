@@ -45,6 +45,12 @@ srttagsvideos_updateVideo:
 srttagsvideos_removeVideo:
     path: /admin/videos/remove/{id}
     defaults: { _controller: SrtTagsVideosBundle:Videos:removeVideo }
+
+srttagsvideos_listUsers:
+    path: /admin/users/list/{page}
+    defaults: { _controller: SrtTagsVideosBundle:Videos:listUsers, page: 1 }
+    requirements:
+        page: \d*
     
 srttagsvideos_about:
     path: /about

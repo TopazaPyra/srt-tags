@@ -1,0 +1,40 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Login</title>
+		<link href="{{ asset('css/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />
+		<link href="{{ asset('bundles/srttagsuser/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<head>
+	
+	<body>
+		<div id="login">
+			<h1 class="text-center"><a href="{{ path('srttagsvideos_index') }}">Srt Tags</a></h1>
+			
+			{% for key, message in app.session.flashbag.all() %}
+				<div class="alert alert-{{ key }}">
+                    {{ message|trans({}, 'FOSUserBundle') }}
+                </div>
+            {% endfor %}
+			
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                <label for="username">{{ 'security.login.username'|trans }}</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+
+                <label for="password">{{ 'security.login.password'|trans }}</label>
+                <input type="password" id="password" name="_password" required="required" />
+
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+            </form>
+
+			
+		</div>
+	<body>
+</html>

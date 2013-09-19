@@ -37,3 +37,6 @@ footer {
 	text-align: center;
 }
 
+#userbar {
+    float: right;
+}

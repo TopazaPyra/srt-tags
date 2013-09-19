@@ -1,0 +1,25 @@
+#login {
+	margin: auto;
+	padding: 10% 0 0;
+	width: 25%;
+}
+
+#login form {
+	padding: 15px;
+	border: 1px solid grey;
+	border-radius: 5px;
+}
+
+#login form input[type="text"], #login form input[type="password"] {
+	width: 95%;
+}
+
+#remember_me {
+    float: left;
+    margin-right: 4px;
+}
+
+#fos_user_content {
+	margin: auto;
+	width: 25%;
+}

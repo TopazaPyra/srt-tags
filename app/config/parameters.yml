@@ -2,7 +2,7 @@
 parameters:
     database_driver: pdo_mysql
     database_host: localhost
-    database_port: ~
+    database_port: null
     database_name: srt-tags
     database_user: srt-tags
     database_password: srt-tags
@@ -11,4 +11,4 @@ parameters:
     mailer_user: null
     mailer_password: null
     locale: fr
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: wY72897jKLQmPR5hwhG73v7HvN7csV
